@@ -11,7 +11,8 @@
 		A118A76327D7C8F10040A801 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A118A76227D7C8F10040A801 /* TableViewCell.swift */; };
 		A141AC7627C0361700DD50BA /* TwitterCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5CE0C7427A455AA00894355 /* TwitterCore.framework */; };
 		A141AC7927C0361800DD50BA /* TwitterKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5CE0C7327A455AA00894355 /* TwitterKit.framework */; };
-		E55206E427A460FF0003FF9E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55206E327A460FF0003FF9E /* ViewController.swift */; };
+		A18F446C27DD497400E120F4 /* MentionsTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18F446B27DD497400E120F4 /* MentionsTVC.swift */; };
+		A18F446E27DD4F4A00E120F4 /* MentionImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18F446D27DD4F4A00E120F4 /* MentionImageTableViewCell.swift */; };
 		E5CE0C5F27A4558A00894355 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5CE0C5E27A4558A00894355 /* AppDelegate.swift */; };
 		E5CE0C6627A4558A00894355 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5CE0C6427A4558A00894355 /* Main.storyboard */; };
 		E5CE0C6827A4558B00894355 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E5CE0C6727A4558B00894355 /* Assets.xcassets */; };
@@ -26,7 +27,8 @@
 /* Begin PBXFileReference section */
 		A118A76027D6A1F30040A801 /* TweetsTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetsTVC.swift; sourceTree = "<group>"; };
 		A118A76227D7C8F10040A801 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
-		E55206E327A460FF0003FF9E /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		A18F446B27DD497400E120F4 /* MentionsTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentionsTVC.swift; sourceTree = "<group>"; };
+		A18F446D27DD4F4A00E120F4 /* MentionImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentionImageTableViewCell.swift; sourceTree = "<group>"; };
 		E5CE0C5B27A4558A00894355 /* TweeterTags.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TweeterTags.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5CE0C5E27A4558A00894355 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E5CE0C6527A4558A00894355 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -77,7 +79,6 @@
 			children = (
 				E5CE0C5E27A4558A00894355 /* AppDelegate.swift */,
 				E5CE0CA327A456E900894355 /* SceneDelegate.swift */,
-				E55206E327A460FF0003FF9E /* ViewController.swift */,
 				E5CE0C6427A4558A00894355 /* Main.storyboard */,
 				E5CE0C6727A4558B00894355 /* Assets.xcassets */,
 				E5CE0C6927A4558B00894355 /* LaunchScreen.storyboard */,
@@ -85,6 +86,8 @@
 				E5CE0C7B27A455E200894355 /* TwitterAccountConfig.xcconfig */,
 				A118A76027D6A1F30040A801 /* TweetsTVC.swift */,
 				A118A76227D7C8F10040A801 /* TableViewCell.swift */,
+				A18F446B27DD497400E120F4 /* MentionsTVC.swift */,
+				A18F446D27DD4F4A00E120F4 /* MentionImageTableViewCell.swift */,
 			);
 			path = TweeterTags;
 			sourceTree = "<group>";
@@ -179,7 +182,8 @@
 				E5CE0C5F27A4558A00894355 /* AppDelegate.swift in Sources */,
 				E5CE0C8127A455E200894355 /* TwitterAPI.swift in Sources */,
 				A118A76327D7C8F10040A801 /* TableViewCell.swift in Sources */,
-				E55206E427A460FF0003FF9E /* ViewController.swift in Sources */,
+				A18F446E27DD4F4A00E120F4 /* MentionImageTableViewCell.swift in Sources */,
+				A18F446C27DD497400E120F4 /* MentionsTVC.swift in Sources */,
 				E5CE0CA427A456E900894355 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
