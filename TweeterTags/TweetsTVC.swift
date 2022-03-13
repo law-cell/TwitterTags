@@ -37,8 +37,7 @@ class TweetsTVC: UITableViewController, UITextFieldDelegate {
     //when the value of textField change
     @objc func textFieldDidChange() {
         
-        print("didChange")
-        print(twitterQueryTextField.text)
+
         twitterQuery = twitterQueryTextField.text
         refreshData()
         
@@ -73,7 +72,7 @@ class TweetsTVC: UITableViewController, UITextFieldDelegate {
         let request = TwitterRequest(search: twitterQuery!, count: 8)
         request.fetchTweets { (tweets) -> Void in
             DispatchQueue.main.async { () -> Void in
-            print("getData1", self.twitterQuery)
+
                 print(tweets.count)
                 self.tweets = tweets
                 self.tableView.reloadData()
@@ -86,45 +85,73 @@ class TweetsTVC: UITableViewController, UITextFieldDelegate {
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "tableViewCell", for: indexPath) as! TableViewCell
-        
-        //self.textLabel?.text = "Query: #UCD"
-        
-                // check log in console
-                
-                
-                print("loadData", indexPath.row)
-                print("当前填充", twitterQuery)
-                let dateArr = tweets[indexPath.row].created.formatted().components(separatedBy: ",")
-                let description: String = tweets[indexPath.row].description
-                let descriptionFirst: String = description.components(separatedBy: CharacterSet.newlines).first!
-                let descriptionArr = descriptionFirst.components(separatedBy: "-")
-                cell.tweetText.text = tweets[indexPath.row].text
-                cell.tweetTitle.text = descriptionArr[0]
-                cell.tweetDate.text = dateArr[1]
-                let url = tweets[indexPath.row].user.profileImageURL
-                let data = try? Data(contentsOf: url!)
-                if (data != nil) {
-                    cell.tweetImage.image = UIImage(data: data!)
-                } else {
-                    cell.tweetImage.image = UIImage(systemName: "paperplane.circle.fill")
-                }
-                
+            let cell = tableView.dequeueReusableCell(withIdentifier: "tableViewCell", for: indexPath) as! TableViewCell
+            
+
                     
-                
-                
-                
-                // update label
-                //self.textLabel?.text = (self.textLabel?.text ?? "") + "\nFetched \(tweets.count) tweets"
+                    
 
-        // Configure the cell...
+            let dateArr = tweets[indexPath.row].created.formatted().components(separatedBy: ",")
+            let description: String = tweets[indexPath.row].description
+            let descriptionFirst: String = description.components(separatedBy: CharacterSet.newlines).first!
+            let descriptionArr = descriptionFirst.components(separatedBy: "-")
+            let attribute = NSMutableAttributedString.init(string: tweets[indexPath.row].text)
+            
+            //change color for parts of text
+            for hashtag in tweets[indexPath.row].hashtags {
+                attribute.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.blue , range: hashtag.nsrange)
+            }
+            
+            for url in tweets[indexPath.row].urls {
+                attribute.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.red , range: url.nsrange)
+            }
+            
+            for user in tweets[indexPath.row].userMentions {
+                attribute.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.green , range: user.nsrange)
+            }
+            cell.tweetText.attributedText = attribute
 
-        return cell
-    }
-    
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 180
-    }
+            cell.tweetTitle.text = descriptionArr[0]
+            
+            // make screen name style to bold
+            cell.tweetTitle.font = UIFont (name: "Helvetica-Bold", size: 17)
+            cell.tweetDate.text = dateArr[1]
+            let url = tweets[indexPath.row].user.profileImageURL
+            let data = try? Data(contentsOf: url!)
+            if (data != nil) {
+                cell.tweetImage.image = UIImage(data: data!)
+            } else {
+                cell.tweetImage.image = UIImage(systemName: "paperplane.circle.fill")
+            }
+                    
+                        
+                    
+                    
+                    
+                    // update label
+                    //self.textLabel?.text = (self.textLabel?.text ?? "") + "\nFetched \(tweets.count) tweets"
+
+            // Configure the cell...
+
+            return cell
+        }
+        
+        override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+            return 180
+        }
+        
+        
+
+        
+        override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+            if segue.identifier == "clickCellSegue", let destination = segue.destination as? MentionsTVC {
+                if let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell) {
+                    let tweet = tweets[indexPath.row]
+                    destination.tweet = tweet
+                }
+            }
+        }
+
     
     
     
