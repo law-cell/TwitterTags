@@ -1,5 +1,5 @@
 //
-//  MentionsCell.swift
+//  RecentsTVCell.swift
 //  TweeterTags
 //
 //  Created by 罗俊豪 on 13/03/2022.
@@ -7,9 +7,9 @@
 
 import UIKit
 
-class MentionsCell: UITableViewCell {
+class RecentsTVCell: UITableViewCell {
 
-    @IBOutlet weak var value: UILabel!
+    @IBOutlet weak var title: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

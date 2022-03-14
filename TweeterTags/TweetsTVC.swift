@@ -9,29 +9,34 @@ import UIKit
 
 class TweetsTVC: UITableViewController, UITextFieldDelegate {
     var tweets = [TwitterTweet]()
-    var twitterQuery: String? = "#ucd"
-    var tweetsCount = 8
-    @IBOutlet weak var twitterQueryTextField: UITextField!
     
+    //when twitterQuery is changed, put data in userDefaults
+    var twitterQuery: String? = "#ucd" {
+        didSet {
+            var array = defaults.object(forKey:"History") as? [String] ?? [String]()
+            array.append(twitterQuery!)
+            print(array)
+            defaults.set(array, forKey: "History")
+            
+        }
+    }
+    
+    @IBOutlet weak var twitterQueryTextField: UITextField!
+    let defaults = UserDefaults.standard
     
     override func viewDidLoad() {
         refreshData()
-        //self.tableView.reloadData()
+
         super.viewDidLoad()
         
-        print("viewDidLoad")
-        //textFieldDidChange()
+        
+
         
         //when the value of textField change
         twitterQueryTextField.addTarget(self, action: #selector(textFieldDidChange), for:  .editingChanged)
         
         twitterQueryTextField.delegate = self
         twitterQueryTextField.text = twitterQuery
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
     //when the value of textField change
@@ -59,8 +64,7 @@ class TweetsTVC: UITableViewController, UITextFieldDelegate {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        print("setNumberOfRows")
-        print(tweets.count)
+
         if(tweets.isEmpty) {
             return 0
         } else {
@@ -68,6 +72,7 @@ class TweetsTVC: UITableViewController, UITextFieldDelegate {
         }
     }
     
+    //re get data
     func refreshData(){
         let request = TwitterRequest(search: twitterQuery!, count: 8)
         request.fetchTweets { (tweets) -> Void in
@@ -116,6 +121,8 @@ class TweetsTVC: UITableViewController, UITextFieldDelegate {
             // make screen name style to bold
             cell.tweetTitle.font = UIFont (name: "Helvetica-Bold", size: 17)
             cell.tweetDate.text = dateArr[1]
+        
+            // set user image
             let url = tweets[indexPath.row].user.profileImageURL
             let data = try? Data(contentsOf: url!)
             if (data != nil) {
@@ -142,7 +149,7 @@ class TweetsTVC: UITableViewController, UITextFieldDelegate {
         
         
 
-        
+        //pass data by segue
         override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
             if segue.identifier == "clickCellSegue", let destination = segue.destination as? MentionsTVC {
                 if let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell) {

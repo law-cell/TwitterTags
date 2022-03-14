@@ -1,5 +1,5 @@
 //
-//  MentionsCell.swift
+//  imageCell.swift
 //  TweeterTags
 //
 //  Created by 罗俊豪 on 13/03/2022.
@@ -7,9 +7,9 @@
 
 import UIKit
 
-class MentionsCell: UITableViewCell {
+class imageCell: UITableViewCell {
 
-    @IBOutlet weak var value: UILabel!
+    @IBOutlet weak var mentionImage: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
